@@ -1,73 +1,276 @@
-# Welcome to your Lovable project
+# Dingdong Loans - Web App Lending Protocol
 
-## Project info
+Selamat datang di proyek Dingdong Loans! Aplikasi web ini adalah mockup untuk sebuah protokol pinjaman berbasis collateral kripto, dirancang khusus untuk memenuhi kebutuhan UMKM di Indonesia. Proyek ini dibangun menggunakan Next.js dan Shadcn UI untuk antarmuka yang bersih, modern, dan user-friendly.
 
-**URL**: https://lovable.dev/projects/8e05a2a4-80f0-4b01-924c-67f77c69121a
+**URL Proyek Lovable:** [https://lovable.dev/projects/8e05a2a4-80f0-4b01-924c-67f77c69121a](https://lovable.dev/projects/8e05a2a4-80f0-4b01-924c-67f77c69121a)
 
-## How can I edit this code?
+## Daftar Isi
 
-There are several ways of editing your application.
+- [Fitur Utama](#fitur-utama)
+- [Teknologi yang Digunakan](#teknologi-yang-digunakan)
+- [Struktur Proyek](#struktur-proyek)
+- [Memulai Proyek (Inisiasi)](#memulai-proyek-inisiasi)
+  - [Persyaratan Sistem](#persyaratan-sistem)
+  - [Langkah-langkah Instalasi](#langkah-langkah-instalasi)
+- [Penggunaan](#penggunaan)
+- [Gaya Desain](#gaya-desain)
+- [Kontribusi](#kontribusi)
+- [Lisensi](#lisensi)
 
-**Use Lovable**
+## Fitur Utama
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/8e05a2a4-80f0-4b01-924c-67f77c69121a) and start prompting.
+Aplikasi Dingdong Loans mencakup fungsionalitas inti untuk simulasi lending protocol, dengan fokus pada pengalaman pengguna UMKM:
 
-Changes made via Lovable will be committed automatically to this repo.
+1.  **Registrasi & Login Pengguna:**
+    * Halaman pendaftaran yang sederhana dan intuitif.
+    * Halaman login untuk pengguna yang sudah terdaftar.
 
-**Use your preferred IDE**
+2.  **Proses KYC (Know Your Customer) Bertahap:**
+    * **Akses Terbatas:** Halaman KYC hanya dapat diakses setelah pendaftaran berhasil, sebagai langkah selanjutnya dalam alur pengguna.
+    * **Verifikasi Identitas:** Input untuk NIK dan unggah foto KTP serta selfie dengan KTP.
+    * **Informasi Usaha:** Input untuk nama dan jenis usaha UMKM, serta opsi untuk NPWP dan surat izin usaha.
+    * **Konfirmasi & Persetujuan:** Ringkasan data yang diisi dan persetujuan syarat & ketentuan.
+    * **Indikator Progres:** Menampilkan langkah-langkah yang sedang berjalan dan yang sudah selesai.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+3.  **Dashboard Pengguna:**
+    * Ringkasan total jaminan, pinjaman aktif, dan Health Factor.
+    * Akses cepat ke fitur-fitur penting seperti pengajuan pinjaman baru, tambah jaminan, bayar pinjaman, kelola pinjaman, dan tarik jaminan.
+    * Ikhtisar portofolio jaminan kripto.
+    * Tabel transaksi terbaru untuk memantau aktivitas akun.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+4.  **Ajukan Pinjaman:**
+    * Formulir pengajuan pinjaman dengan input jumlah IDRX yang diinginkan, jenis jaminan kripto, dan jangka waktu pinjaman.
+    * Perhitungan real-time untuk estimasi jaminan yang diperlukan, suku bunga, dan pembayaran bulanan.
+    * **Alur Pemberian Jaminan:** Setelah aplikasi disetujui secara simulasi, pengguna diarahkan langsung ke halaman `Deposit Collateral` untuk menyetorkan jaminan. Status pinjaman akan diperbarui sesuai progres deposit jaminan.
 
-Follow these steps:
+5.  **Tambah Jaminan (Deposit Collateral):**
+    * Memungkinkan pengguna untuk menambahkan jaminan kripto ke pinjaman yang sudah ada atau yang baru diajukan.
+    * Pilihan jenis kripto dan jumlah yang akan disetorkan.
+    * Menampilkan alamat deposit wallet (dan QR Code simulasi) yang unik untuk setiap jenis kripto.
+    * Peringatan penting untuk memastikan pengguna hanya mengirim aset yang benar.
+    * Pelacakan status transaksi deposit secara simulasi (Menunggu Konfirmasi, Dikonfirmasi, Selesai).
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+6.  **Bayar Pinjaman (Repay Loan):**
+    * Memungkinkan pengguna untuk melunasi pinjaman aktif mereka.
+    * Opsi pembayaran: pelunasan penuh, cicilan bulanan, atau jumlah kustom.
+    * Menampilkan alamat pembayaran IDRX (dan QR Code simulasi).
+    * Peringatan penting untuk memastikan pengguna hanya mengirim IDRX.
+    * Pelacakan status transaksi pembayaran secara simulasi.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+7.  **Kelola Pinjaman:**
+    * Halaman untuk melihat detail semua pinjaman aktif, termasuk sisa hutang, nilai jaminan, Health Factor, dan tanggal jatuh tempo.
+    * Indikator Health Factor dengan warna yang berbeda untuk status aman, peringatan, dan bahaya.
+    * Tautan langsung untuk membayar cicilan atau menambah jaminan pada pinjaman tertentu.
+    * Jadwal pembayaran yang akan datang.
 
-# Step 3: Install the necessary dependencies.
-npm i
+8.  **Halaman FAQ (Frequently Asked Questions):**
+    * Kumpulan pertanyaan dan jawaban umum mengenai platform, proses pinjaman, jaminan, pembayaran, dan keamanan.
+    * Fitur pencarian untuk mempermudah pengguna menemukan jawaban.
+    * Desain akordeon untuk tampilan yang ringkas dan mudah dinavigasi.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+9.  **Halaman About Us (Tentang Kami):**
+    * Menjelaskan misi, visi, dan cerita di balik Dingdong Loans.
+    * Menyajikan nilai-nilai inti perusahaan (Keamanan, Transparansi, Fokus Pengguna, Inovasi).
+    * Bagian tentang komitmen keamanan dan rencana masa depan (roadmap).
 
-**Edit a file directly in GitHub**
+10. **Komponen UI Umum:** Navbar, Hero Section, Buttons, Cards, Footer, Input Fields, Skeleton Loaders, dan improvisasi komponen Shadcn UI lainnya (tabel, alert, dll.) untuk pengalaman pengguna yang komprehensif.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Teknologi yang Digunakan
 
-**Use GitHub Codespaces**
+Proyek ini dibangun dengan teknologi modern untuk memastikan kinerja dan skalabilitas:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+* **Framework:** Vite (Sebagai bundler dan dev server untuk React)
+* **Library:** React (Untuk membangun antarmuka pengguna)
+* **Bahasa:** TypeScript (Untuk penulisan kode yang lebih aman dan terstruktur)
+* **Komponen UI:** Shadcn UI (Koleksi komponen UI yang dapat diakses dan dapat disesuaikan)
+* **Styling:** Tailwind CSS (Framework CSS untuk styling cepat dan responsif)
+* **Routing:** React Router DOM (Untuk navigasi di dalam aplikasi)
+* **State Management/Data Fetching:** React Query (atau Tanstack Query) (Untuk pengelolaan state server dan caching data)
 
-## What technologies are used for this project?
+## Struktur Proyek
 
-This project is built with:
+Struktur folder proyek diatur agar modular dan mudah dipahami:
+dingdong-pinjam-dulu-loan/
+├── public/                    # File statis seperti robots.txt
+│   └── robots.txt
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+├── src/                       # Source code aplikasi
+│   ├── assets/                # Aset gambar, ikon, dll. (jika ada)
+│   ├── components/            # Komponen UI yang dapat digunakan kembali
+│   │   ├── ui/                # Komponen Shadcn UI yang telah di-generate
+│   │   │   ├── accordion.tsx
+│   │   │   ├── alert-dialog.tsx
+│   │   │   ├── alert.tsx
 
-## How can I deploy this project?
+│   │   │   ├── aspect-ratio.tsx
+│   │   │   ├── avatar.tsx
 
-Simply open [Lovable](https://lovable.dev/projects/8e05a2a4-80f0-4b01-924c-67f77c69121a) and click on Share -> Publish.
+│   │   │   ├── badge.tsx
 
-## Can I connect a custom domain to my Lovable project?
+│   │   │   ├── breadcrumb.tsx
+│   │   │   ├── button.tsx
 
-Yes, you can!
+│   │   │   ├── calendar.tsx
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+│   │   │   ├── card.tsx
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+│   │   │   ├── carousel.tsx
+
+│   │   │   ├── chart.tsx
+
+│   │   │   ├── checkbox.tsx
+
+│   │   │   ├── collapsible.tsx
+│   │   │   ├── command.tsx
+
+│   │   │   ├── context-menu.tsx
+│   │   │   ├── dialog.tsx
+
+│   │   │   ├── drawer.tsx
+
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── form.tsx
+
+│   │   │   ├── hover-card.tsx
+│   │   │   ├── input-otp.tsx
+│   │   │   ├── input.tsx
+
+│   │   │   ├── label.tsx
+
+│   │   │   ├── menubar.tsx
+
+│   │   │   ├── navigation-menu.tsx
+│   │   │   ├── pagination.tsx
+│   │   │   ├── popover.tsx
+
+│   │   │   ├── progress.tsx
+
+│   │   │   ├── radio-group.tsx
+│   │   │   ├── resizable.tsx
+│   │   │   ├── scroll-area.tsx
+│   │   │   ├── select.tsx
+
+│   │   │   ├── separator.tsx
+│   │   │   ├── sheet.tsx
+
+│   │   │   ├── sidebar.tsx
+
+│   │   │   ├── skeleton.tsx
+
+│   │   │   ├── slider.tsx
+
+│   │   │   ├── sonner.tsx
+
+│   │   │   ├── switch.tsx
+
+│   │   │   ├── table.tsx
+
+│   │   │   ├── tabs.tsx
+
+│   │   │   ├── textarea.tsx
+
+│   │   │   ├── toast.tsx
+
+│   │   │   └── toaster.tsx
+
+│   │   ├── Footer.tsx         # Komponen footer aplikasi
+│   │   ├── Navbar.tsx         # Komponen navbar aplikasi
+│   │   └── SkeletonLoader.tsx # Komponen skeleton loader kustom
+│   ├── hooks/                 # Custom React Hooks
+│   │   ├── use-mobile.tsx     # Hook untuk deteksi perangkat mobile
+│   │   └── use-toast.ts       # Hook untuk sistem toast/notifikasi
+│   ├── lib/                   # Utility functions
+│   │   └── utils.ts           # Fungsi utilitas umum (cn, dll.)
+│   ├── pages/                 # Halaman-halaman utama aplikasi
+│   │   ├── AboutUs.tsx        # Halaman "Tentang Kami"
+│   │   ├── ApplyLoan.tsx      # Halaman pengajuan pinjaman
+│   │   ├── Dashboard.tsx      # Halaman dashboard pengguna
+│   │   ├── DepositCollateral.tsx # Halaman deposit jaminan
+│   │   ├── FAQ.tsx            # Halaman Frequently Asked Questions
+│   │   ├── Homepage.tsx       # Halaman beranda
+│   │   ├── Index.tsx          # Halaman indeks (fallback)
+│   │   ├── KYC.tsx            # Halaman proses KYC
+│   │   ├── Login.tsx          # Halaman login
+│   │   ├── ManageLoans.tsx    # Halaman pengelolaan pinjaman
+│   │   ├── NotFound.tsx       # Halaman 404 (Not Found)
+│   │   ├── Register.tsx       # Halaman registrasi
+│   │   └── RepayLoan.tsx      # Halaman pembayaran pinjaman
+│   ├── App.css                # CSS Global untuk App
+│   ├── App.tsx                # Komponen utama aplikasi React
+│   ├── index.css              # Styling utama Tailwind CSS
+│   └── main.tsx               # Entry point aplikasi React
+├── .gitignore                 # File yang diabaikan oleh Git
+├── components.json            # Konfigurasi Shadcn UI
+├── eslint.config.js           # Konfigurasi ESLint
+├── index.html                 # File HTML utama
+├── package-lock.json          # Dependency lock file
+├── package.json               # Informasi proyek dan dependencies
+├── postcss.config.js          # Konfigurasi PostCSS
+├── tailwind.config.ts         # Konfigurasi Tailwind CSS
+├── tsconfig.app.json          # Konfigurasi TypeScript untuk aplikasi
+├── tsconfig.json              # Konfigurasi TypeScript utama
+├── tsconfig.node.json         # Konfigurasi TypeScript untuk Node.js
+└── vite.config.ts             # Konfigurasi Vite
+
+## Memulai Proyek (Inisiasi)
+
+Ikuti langkah-langkah di bawah ini untuk menjalankan proyek Dingdong Loans di lingkungan lokal Anda.
+
+### Persyaratan Sistem
+
+Pastikan Anda memiliki:
+
+* **Node.js:** Versi 18.0.0 atau lebih tinggi.
+* **npm:** Biasanya terinstal bersama Node.js.
+
+### Langkah-langkah Instalasi
+
+1.  **Clone Repositori:**
+    Buka terminal atau command prompt Anda dan clone repositori ini:
+
+    ```bash
+    git clone <URL_REPO_ANDA>
+    cd dingdong-pinjam-dulu-loan
+    ```
+
+2.  **Instal Dependensi:**
+    Navigasikan ke direktori proyek dan instal semua dependensi yang diperlukan:
+
+    ```bash
+    npm install
+    ```
+    Atau jika Anda menggunakan Yarn:
+    ```bash
+    yarn install
+    ```
+
+3.  **Jalankan Aplikasi:**
+    Setelah semua dependensi terinstal, Anda bisa menjalankan aplikasi dalam mode pengembangan:
+
+    ```bash
+    npm run dev
+    ```
+    Ini akan memulai server pengembangan dan biasanya akan membuka aplikasi di browser Anda (misalnya, `http://localhost:8080`).
+
+## Penggunaan
+
+Aplikasi ini adalah mockup, sehingga tidak ada fungsionalitas backend yang sebenarnya. Namun, Anda bisa menjelajahi alur dan interaksi UI:
+
+* **Registrasi:** Kunjungi `/register` untuk membuat akun simulasi. Setelah berhasil, Anda akan diarahkan ke halaman KYC.
+* **Login:** Gunakan `/login` untuk masuk. Anda bisa menggunakan kredensial demo: `user@example.com` / `password`.
+* **KYC:** Ikuti langkah-langkah verifikasi identitas dan usaha.
+* **Dashboard:** Setelah login (atau melewati KYC), Anda akan melihat ringkasan akun dan opsi untuk berbagai fitur.
+* **Ajukan Pinjaman:** Isi detail pinjaman dan ikuti alur untuk "menyetorkan jaminan".
+* **Tambah Jaminan / Bayar Pinjaman:** Jelajahi simulasi proses transaksi deposit dan pembayaran.
+
+## Gaya Desain
+
+Dingdong Loans menggunakan gaya desain **simple dan bersih** dengan dominasi **warna putih**, diperkaya dengan **sedikit gradasi biru dan hijau** pada elemen-elemen penting seperti tombol dan ikon. Tampilan ini dirancang agar sangat **user-friendly** dan mudah dipahami oleh **UMKM serta orang awam Web3**, meminimalkan kompleksitas visual.
+
+## Kontribusi
+
+Proyek ini adalah mockup. Jika Anda memiliki saran atau ingin berkontribusi pada pengembangan lebih lanjut (misalnya, menambahkan fitur baru atau meningkatkan UI/UX), silakan buka issue atau ajukan pull request.
+
+## Lisensi
+
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).

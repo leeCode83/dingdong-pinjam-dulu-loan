@@ -20,9 +20,6 @@ const Navbar = () => {
           <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">
             Dashboard
           </Link>
-          <Link to="/kyc" className="text-muted-foreground hover:text-foreground transition-colors">
-            Verifikasi KYC
-          </Link>
           <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
             FAQ
           </Link>
