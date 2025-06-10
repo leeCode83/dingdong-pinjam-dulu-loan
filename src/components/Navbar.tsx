@@ -23,11 +23,11 @@ const Navbar = () => {
           <Link to="/kyc" className="text-muted-foreground hover:text-foreground transition-colors">
             Verifikasi KYC
           </Link>
-          <Link to="#" className="text-muted-foreground hover:text-foreground transition-colors">
+          <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
             FAQ
           </Link>
-          <Link to="#" className="text-muted-foreground hover:text-foreground transition-colors">
-            Kontak
+          <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">
+            Tentang Kami
           </Link>
         </div>
 

@@ -23,15 +23,15 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="#" className="hover:text-foreground transition-colors">Pinjaman IDRX</Link></li>
               <li><Link to="#" className="hover:text-foreground transition-colors">Jaminan Crypto</Link></li>
-              <li><Link to="#" className="hover:text-foreground transition-colors">Dashboard</Link></li>
+              <li><Link to="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Dukungan</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="#" className="hover:text-foreground transition-colors">FAQ</Link></li>
-              <li><Link to="#" className="hover:text-foreground transition-colors">Kontak</Link></li>
+              <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
+              <li><Link to="/about" className="hover:text-foreground transition-colors">Tentang Kami</Link></li>
               <li><Link to="#" className="hover:text-foreground transition-colors">Tutorial</Link></li>
             </ul>
           </div>
@@ -41,7 +41,7 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="#" className="hover:text-foreground transition-colors">Syarat & Ketentuan</Link></li>
               <li><Link to="#" className="hover:text-foreground transition-colors">Kebijakan Privasi</Link></li>
-              <li><Link to="#" className="hover:text-foreground transition-colors">Tentang Kami</Link></li>
+              <li><Link to="/about" className="hover:text-foreground transition-colors">Tentang Kami</Link></li>
             </ul>
           </div>
         </div>
