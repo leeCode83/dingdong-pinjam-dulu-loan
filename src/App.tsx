@@ -11,6 +11,8 @@ import ManageLoans from "./pages/ManageLoans";
 import KYC from "./pages/KYC";
 import FAQ from "./pages/FAQ";
 import AboutUs from "./pages/AboutUs";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/apply" element={<ApplyLoan />} />
           <Route path="/loans" element={<ManageLoans />} />

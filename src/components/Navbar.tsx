@@ -32,11 +32,11 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center space-x-3">
-          <Button variant="outline" size="sm">
-            Masuk
+          <Button variant="outline" size="sm" asChild>
+            <Link to="/login">Masuk</Link>
           </Button>
-          <Button className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600" size="sm">
-            Daftar
+          <Button className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600" size="sm" asChild>
+            <Link to="/register">Daftar</Link>
           </Button>
         </div>
       </div>
