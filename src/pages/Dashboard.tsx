@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SkeletonLoader from "@/components/SkeletonLoader";
-import { TrendingUp, Wallet, CreditCard, Plus, Eye } from "lucide-react";
+import { TrendingUp, Wallet, CreditCard, Plus, Eye, ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Dashboard = () => {
@@ -75,27 +75,35 @@ const Dashboard = () => {
         )}
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <Link to="/apply">
             <Button className="w-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600">
               <Plus className="w-4 h-4 mr-2" />
               Pinjaman Baru
             </Button>
           </Link>
-          <Button variant="outline" className="w-full">
-            <Wallet className="w-4 h-4 mr-2" />
-            Tambah Jaminan
-          </Button>
-          <Button variant="outline" className="w-full">
-            <CreditCard className="w-4 h-4 mr-2" />
-            Bayar Pinjaman
-          </Button>
+          <Link to="/deposit-collateral">
+            <Button variant="outline" className="w-full">
+              <ArrowUpCircle className="w-4 h-4 mr-2" />
+              Tambah Jaminan
+            </Button>
+          </Link>
+          <Link to="/repay-loan">
+            <Button variant="outline" className="w-full">
+              <ArrowDownCircle className="w-4 h-4 mr-2" />
+              Bayar Pinjaman
+            </Button>
+          </Link>
           <Link to="/loans">
             <Button variant="outline" className="w-full">
               <Eye className="w-4 h-4 mr-2" />
               Kelola Pinjaman
             </Button>
           </Link>
+          <Button variant="outline" className="w-full">
+            <Wallet className="w-4 h-4 mr-2" />
+            Tarik Jaminan
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

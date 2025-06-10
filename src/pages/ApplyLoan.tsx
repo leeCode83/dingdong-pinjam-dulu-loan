@@ -8,34 +8,119 @@ import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SkeletonLoader from "@/components/SkeletonLoader";
-import { Calculator, AlertCircle, CheckCircle } from "lucide-react";
+import { Calculator, AlertCircle, CheckCircle, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const ApplyLoan = () => {
   const [loading, setLoading] = useState(false);
   const [loanAmount, setLoanAmount] = useState("");
   const [collateralType, setCollateralType] = useState("");
   const [duration, setDuration] = useState("");
+  const [applicationSubmitted, setApplicationSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const calculateRequirements = () => {
     const amount = parseFloat(loanAmount) || 0;
-    const collateralRequired = amount * 1.5; // 150% collateralization
+    const collateralRatio = 1.5; // 150% collateralization
     const interestRate = 8.5; // 8.5% annual
     const monthlyPayment = duration ? (amount * (1 + interestRate/100)) / parseInt(duration) : 0;
     
+    // Mock crypto prices
+    const cryptoPrices = {
+      bitcoin: 42000,
+      ethereum: 2500,
+      usdc: 1,
+      usdt: 1
+    };
+    
+    const requiredCollateralUSD = (amount / 15800) * collateralRatio; // Assuming 1 USD = 15,800 IDR
+    const requiredCollateralAmount = collateralType ? requiredCollateralUSD / cryptoPrices[collateralType as keyof typeof cryptoPrices] : 0;
+    
     return {
-      collateralRequired,
+      collateralRequiredUSD: requiredCollateralUSD,
+      collateralRequiredAmount: requiredCollateralAmount,
       interestRate,
-      monthlyPayment
+      monthlyPayment,
+      collateralRatio
     };
   };
 
-  const { collateralRequired, interestRate, monthlyPayment } = calculateRequirements();
+  const { collateralRequiredUSD, collateralRequiredAmount, interestRate, monthlyPayment, collateralRatio } = calculateRequirements();
 
   const handleSubmit = () => {
     setLoading(true);
-    setTimeout(() => setLoading(false), 3000);
+    setTimeout(() => {
+      setApplicationSubmitted(true);
+      setLoading(false);
+    }, 2000);
   };
+
+  const proceedToDeposit = () => {
+    // In a real app, you'd pass the loan application data
+    navigate('/deposit-collateral', { 
+      state: { 
+        loanAmount, 
+        collateralType, 
+        requiredAmount: collateralRequiredAmount,
+        applicationId: 'APP-' + Date.now()
+      } 
+    });
+  };
+
+  if (applicationSubmitted) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-2xl mx-auto text-center">
+            <Card>
+              <CardContent className="pt-6">
+                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                <h2 className="text-2xl font-bold mb-4">Aplikasi Pinjaman Disetujui!</h2>
+                <p className="text-muted-foreground mb-6">
+                  Selamat! Aplikasi pinjaman Anda telah disetujui. Langkah selanjutnya adalah menyetorkan jaminan crypto.
+                </p>
+                
+                <div className="bg-blue-50 p-4 rounded-lg mb-6">
+                  <div className="text-sm text-left space-y-2">
+                    <div className="flex justify-between">
+                      <span>Jumlah Pinjaman:</span>
+                      <span className="font-medium">Rp {parseFloat(loanAmount).toLocaleString('id-ID')}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Jaminan Diperlukan:</span>
+                      <span className="font-medium">
+                        {collateralRequiredAmount.toFixed(6)} {collateralType?.toUpperCase()}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Nilai Jaminan:</span>
+                      <span className="font-medium">~${collateralRequiredUSD.toLocaleString('en-US')}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <Button 
+                  className="w-full bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 mb-4"
+                  size="lg"
+                  onClick={proceedToDeposit}
+                >
+                  Lanjut ke Deposit Jaminan
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+
+                <p className="text-sm text-muted-foreground">
+                  IDRX akan dikirim ke wallet Anda setelah jaminan dikonfirmasi (5-15 menit)
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -108,7 +193,7 @@ const ApplyLoan = () => {
                         <div className="text-sm">
                           <p className="font-medium text-blue-900 mb-1">Persyaratan Jaminan</p>
                           <p className="text-blue-700">
-                            Anda perlu menyetorkan crypto senilai 150% dari jumlah pinjaman sebagai jaminan.
+                            Anda perlu menyetorkan crypto senilai {Math.round(collateralRatio * 100)}% dari jumlah pinjaman sebagai jaminan.
                           </p>
                         </div>
                       </div>
@@ -139,7 +224,15 @@ const ApplyLoan = () => {
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground">Jaminan Diperlukan</span>
                     <span className="font-medium text-blue-600">
-                      {collateralRequired > 0 ? `~$${collateralRequired.toLocaleString('en-US')}` : '-'}
+                      {collateralRequiredAmount > 0 && collateralType ? 
+                        `${collateralRequiredAmount.toFixed(6)} ${collateralType.toUpperCase()}` : '-'}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Nilai Jaminan (USD)</span>
+                    <span className="font-medium">
+                      {collateralRequiredUSD > 0 ? `~$${collateralRequiredUSD.toLocaleString('en-US')}` : '-'}
                     </span>
                   </div>
 
@@ -156,9 +249,9 @@ const ApplyLoan = () => {
                   </div>
 
                   <div className="flex justify-between items-center">
-                    <span className="text-muted-foreground">Health Factor</span>
+                    <span className="text-muted-foreground">Rasio Jaminan</span>
                     <Badge variant="default" className="bg-green-100 text-green-800">
-                      1.5 (Aman)
+                      {Math.round(collateralRatio * 100)}% (Aman)
                     </Badge>
                   </div>
                 </div>
@@ -170,7 +263,7 @@ const ApplyLoan = () => {
                       <div className="text-sm">
                         <p className="font-medium text-green-900 mb-1">Persetujuan Cepat</p>
                         <p className="text-green-700">
-                          Pinjaman Anda akan diproses dalam 5-10 menit setelah jaminan dikonfirmasi.
+                          Aplikasi akan diproses dalam 2-5 menit. Setelah disetujui, Anda akan diarahkan untuk menyetorkan jaminan.
                         </p>
                       </div>
                     </div>
@@ -182,7 +275,7 @@ const ApplyLoan = () => {
                     onClick={handleSubmit}
                     disabled={!loanAmount || !collateralType || !duration || loading}
                   >
-                    {loading ? "Memproses..." : "Ajukan Pinjaman"}
+                    {loading ? "Memproses Aplikasi..." : "Ajukan Pinjaman"}
                   </Button>
                 </div>
               </CardContent>
@@ -192,18 +285,18 @@ const ApplyLoan = () => {
           {/* Steps Guide */}
           <Card className="mt-8">
             <CardHeader>
-              <CardTitle>Langkah Selanjutnya</CardTitle>
-              <CardDescription>Apa yang akan terjadi setelah Anda submit aplikasi</CardDescription>
+              <CardTitle>Proses Pinjaman</CardTitle>
+              <CardDescription>Langkah-langkah setelah Anda submit aplikasi</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div className="text-center">
                   <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <span className="text-blue-600 font-bold">1</span>
                   </div>
                   <h3 className="font-medium mb-2">Review Aplikasi</h3>
                   <p className="text-sm text-muted-foreground">
-                    Kami akan mereview aplikasi Anda dalam 2-5 menit
+                    Aplikasi direview dalam 2-5 menit
                   </p>
                 </div>
 
@@ -213,7 +306,7 @@ const ApplyLoan = () => {
                   </div>
                   <h3 className="font-medium mb-2">Setorkan Jaminan</h3>
                   <p className="text-sm text-muted-foreground">
-                    Transfer crypto ke alamat smart contract yang disediakan
+                    Transfer crypto ke alamat yang disediakan
                   </p>
                 </div>
 
@@ -221,9 +314,19 @@ const ApplyLoan = () => {
                   <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <span className="text-blue-600 font-bold">3</span>
                   </div>
+                  <h3 className="font-medium mb-2">Konfirmasi Jaminan</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Menunggu konfirmasi blockchain (5-15 menit)
+                  </p>
+                </div>
+
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <span className="text-blue-600 font-bold">4</span>
+                  </div>
                   <h3 className="font-medium mb-2">Terima IDRX</h3>
                   <p className="text-sm text-muted-foreground">
-                    IDRX akan dikirim ke wallet Anda setelah jaminan dikonfirmasi
+                    IDRX dikirim ke wallet Anda
                   </p>
                 </div>
               </div>
