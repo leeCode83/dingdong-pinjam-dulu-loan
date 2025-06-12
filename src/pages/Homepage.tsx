@@ -1,9 +1,17 @@
-
+// import komponen shadcn yang dibutuhkan (button, card, dll)
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+//untuk berpindah halaman, misalnya dari homepage ke FAQ
+//Tidak menggunakan <a> karena dengan Link, web tidak perlu
+// memuat seluruh halaman, jadi lebih cepat loadingnya
 import { Link } from "react-router-dom";
+
+//Navbar dan Footer Section merupakan komponen buatan sendiri
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+//import untuk menggunakan ikon-ikon dari react untuk membuat informasi lebih bagus
 import { CheckCircle, Clock, Shield, TrendingUp } from "lucide-react";
 
 const Homepage = () => {
