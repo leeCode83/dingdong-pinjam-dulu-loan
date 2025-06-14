@@ -10,6 +10,15 @@ import SkeletonLoader from "@/components/SkeletonLoader";
 import { AlertTriangle, TrendingUp, Wallet, CreditCard, Calendar } from "lucide-react";
 import { useState, useEffect } from "react";
 
+
+/*
+Memberikan Gambaran Menyeluruh: Menampilkan statistik agregat dari semua pinjaman, seperti total hutang dan total nilai jaminan.
+Menampilkan Detail Setiap Pinjaman: Merinci setiap pinjaman aktif dalam kartu-kartu terpisah, lengkap dengan progress pembayaran,
+ health factor, dan detail jaminan.
+Memvisualisasikan Kesehatan Pinjaman: Menggunakan warna dan badge untuk secara visual mengkomunikasikan status "kesehatan" pinjaman, 
+apakah aman, butuh perhatian, atau dalam bahaya.
+Menampilkan Jadwal Pembayaran: Memberi tahu pengguna kapan pembayaran berikutnya jatuh tempo untuk setiap pinjaman.
+*/
 const ManageLoans = () => {
   const [loading, setLoading] = useState(true);
 
@@ -18,6 +27,7 @@ const ManageLoans = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  //Data pinjaman mockup untuk contoh. Nanti akan mengambil dari smart contract atau API
   const loans = [
     {
       id: "LOAN-001",
@@ -40,9 +50,21 @@ const ManageLoans = () => {
       dueDate: "2024-08-20",
       status: "active",
       interestRate: 8.5
+    },
+    {
+      id: "LOAN-003", 
+      amount: 65000000,
+      outstanding: 18000000,
+      collateral: "0.9 ETH",
+      collateralValue: 1200,
+      healthFactor: 2.5,
+      dueDate: "2025-03-20",
+      status: "active",
+      interestRate: 10.0
     }
   ];
 
+  //Perhitungan health factor untuk memberikan warna kotak
   const getHealthFactorColor = (factor: number) => {
     if (factor >= 2.0) return "text-green-600";
     if (factor >= 1.5) return "text-yellow-600";

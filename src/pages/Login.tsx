@@ -11,16 +11,21 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Login = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //bawaan dari reactrouter-dom, berguna untuk mengarahkan user ke dashboard seteleh login berhasil
+
+  //state untuk menyimpan data input login
   const [formData, setFormData] = useState({
-    email: "",
-    password: ""
+    email: "",    //user@example.com
+    password: ""  //password
   });
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
 
+  //Memeriksa kelengkapan input user untuk login.
+  //Fungsi akan memeriksa formData, jika ditemukan salah satu bagian kosong,
+  //fungsi akan memberikan objek yang berisi pesan error
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 

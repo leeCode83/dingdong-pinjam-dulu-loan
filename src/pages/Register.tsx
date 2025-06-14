@@ -5,14 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+// import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, CheckCircle } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Register = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate();   //mengarakan user menuju proses KYC setelah register berhasil
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -23,7 +23,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
-  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);  //state status dari registrasi user
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};

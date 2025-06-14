@@ -14,9 +14,16 @@ import { Check, Info, FileText, Image } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const KYC = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  //state management
+  const [currentStep, setCurrentStep] = useState(1);  //state yang menyimpan informasi dari langkah dari KYC user
+  const [isLoading, setIsLoading] = useState(false);  //state untuk loading
+
+  //state yang memeriksa apakah user telah mengisi 
+  // semua data yang diperlukan sebelum menuju step sekalnjutnya.
+  //Digunakan untuk memberi warna hijau pada indikator progres
+  const [completedSteps, setCompletedSteps] = useState<number[]>([]); 
+  
+  //menyimpan informasi mengenai data yang user tuliskan pada form yang tersedia
   const [formData, setFormData] = useState({
     nik: "",
     npwp: "",
@@ -28,8 +35,8 @@ const KYC = () => {
     agreeToTerms: false
   });
 
-  const totalSteps = 3;
-  const progressPercentage = (currentStep / totalSteps) * 100;
+  const totalSteps = 3; //step KYC dibagi menjadi 3 bagian. Mulai dari data diri, data usaha, hingga konfirmasi akhir
+  const progressPercentage = (currentStep / totalSteps) * 100;  //Persentase laju kemanjuan dari progres KYC user
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, fileType: string) => {
     const file = event.target.files?.[0];
@@ -52,6 +59,13 @@ const KYC = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
+
+  /*
+  Terdapat 3 variabel selain komponen utama.
+  renderStep1, 2, dan 3 adalah variabel yang return
+  UI untuk setiap langkah dari KYC. Mulai dari
+  data diri, data usaha, hingga konfirmasi akhir
+  */
   const renderStep1 = () => (
     <Card className="w-full max-w-2xl mx-auto">
       <CardHeader className="text-center">
@@ -257,6 +271,7 @@ const KYC = () => {
     </Card>
   );
 
+  //Fungsi yang mengatur tampilan UI dari step KYC berdasarkan variabel currentStep
   const renderStepContent = () => {
     if (isLoading) {
       return (
@@ -278,10 +293,11 @@ const KYC = () => {
     }
   };
 
+  //FUngsi yang memeriksa kelengkapan data dan input user sebelum diproses untuk langkah selanjutnya
   const canProceed = () => {
     switch (currentStep) {
       case 1:
-        return formData.nik.length === 16 && formData.ktpFile && formData.selfieFile;
+        return formData.nik.length === 16   //&& formData.ktpFile && formData.selfieFile;
       case 2:
         return formData.businessName && formData.businessType;
       case 3:

@@ -15,8 +15,8 @@ import { useToast } from "@/hooks/use-toast";
 
 const RepayLoan = () => {
   const [loading, setLoading] = useState(false);
-  const [selectedLoan, setSelectedLoan] = useState("");
-  const [repaymentType, setRepaymentType] = useState("full");
+  const [selectedLoan, setSelectedLoan] = useState("");   //menyimpan data pilihan pinjaman yang mau dibayarkan
+  const [repaymentType, setRepaymentType] = useState("full");   //menyimpan data tipe pembayaran pinjaman (1 bulan, langsung lunas, atau custom)
   const [customAmount, setCustomAmount] = useState("");
   const [repaymentStatus, setRepaymentStatus] = useState("ready");
   const { toast } = useToast();
@@ -34,8 +34,10 @@ const RepayLoan = () => {
     }
   ];
 
+  //address mockup untuk pembayaran pinjaman
   const repaymentAddress = "IDRXRepay1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
 
+  //Menentukan jumlah yang perlu dibayarkan bedasarkan repaymentType.
   const getRepaymentAmount = () => {
     const loan = loans.find(l => l.id === selectedLoan);
     if (!loan) return 0;
