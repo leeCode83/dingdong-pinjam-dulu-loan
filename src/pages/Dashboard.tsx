@@ -10,9 +10,21 @@ import SkeletonLoader from "@/components/SkeletonLoader";
 import { TrendingUp, Wallet, CreditCard, Plus, Eye, ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const Dashboard = () => {
-  const [loading, setLoading] = useState(true);
+// Fungsi utama halaman Dashboard adalah:
+// Menyajikan Ringkasan Finansial: Menampilkan data-data kunci seperti total jaminan, 
+// sisa hutang, dan "Health Factor" dalam format yang mudah dicerna.
+// Menyediakan Akses Cepat (Quick Actions): Memberikan tombol-tombol untuk tindakan paling 
+// umum yang mungkin ingin dilakukan pengguna, seperti mengajukan pinjaman baru atau membayar cicilan.
+// Menampilkan Detail Aset dan Aktivitas: Memberikan rincian tentang aset apa saja yang dijadikan 
+// jaminan dan riwayat transaksi terbaru.
 
+
+const Dashboard = () => {
+  const [loading, setLoading] = useState(true); //state untuk loading
+
+  //Hook ini dijalankan sekali setelah komponen pertama kali ditampilkan. 
+  //Di dalamnya, ada setTimeout yang akan mengubah state loading menjadi false setelah 2 detik.
+  //Untuk mensimulasikan pengalaman nyata di mana aplikasi butuh beberapa waktu untuk mengambil data dari server.
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2000);
     return () => clearTimeout(timer);

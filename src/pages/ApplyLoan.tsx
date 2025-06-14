@@ -1,3 +1,4 @@
+//Halaman untuk formulir pengajuan pinjaman
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,20 +14,35 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const ApplyLoan = () => {
-  const [loading, setLoading] = useState(false);
+
+  // state management untuk halaman ApplyLoan:
+  // loanAmount, collateralType, duration: Menyimpan nilai yang dimasukkan pengguna ke dalam form.
+  // loading: Menyimpan status apakah aplikasi sedang dalam proses "mengirim" (untuk menampilkan indikator loading).
+  // applicationSubmitted: Ini adalah state kunci yang berfungsi sebagai "saklar". 
+  // Nilainya menentukan tampilan mana yang akan dilihat pengguna: formulir pengajuan (false) atau halaman sukses (true).
   const [loanAmount, setLoanAmount] = useState("");
   const [collateralType, setCollateralType] = useState("");
   const [duration, setDuration] = useState("");
+  const [loading, setLoading] = useState(false);
   const [applicationSubmitted, setApplicationSubmitted] = useState(false);
   const navigate = useNavigate();
 
+  /*
+  calculateRequirements merupakan fungsi utama dari page ApplyLoan.
+  Fungsi ini melakukan perhitungan yang diperlukan saat user mau mengajukan pinjaman.
+  Seperti penentuan rasio dari kolateral user, interest ratenya berapa, serta bagaimana pembayarannya.
+  Fungsi ini juga menyediakan harga dari aset kripto yang nantinya akan dijadikan kolateral,
+  harga ini akan diambil dari oracle saat sudah jadi.
+  Melakukan return dalam bentuk objek yg berisi kolateral yang dibutuhkan dalam kripto dan USD, interest rate, 
+  pembayarannya, serta rasio dari kolaeral user
+  */
   const calculateRequirements = () => {
     const amount = parseFloat(loanAmount) || 0;
-    const collateralRatio = 1.5; // 150% collateralization
-    const interestRate = 8.5; // 8.5% annual
+    const collateralRatio = 1.5; // 150% collateralization, bisa disesuaikan nantinya sama kebutuhan nyata
+    const interestRate = 8.5; // 8.5% annual, bisa disesuaikan nantinya 
     const monthlyPayment = duration ? (amount * (1 + interestRate/100)) / parseInt(duration) : 0;
     
-    // Mock crypto prices
+    // Mock crypto prices || Nanti akan pakai data dari Oracle untuk harga asset kriptonya
     const cryptoPrices = {
       bitcoin: 42000,
       ethereum: 2500,
@@ -34,7 +50,9 @@ const ApplyLoan = () => {
       usdt: 1
     };
     
-    const requiredCollateralUSD = (amount / 15800) * collateralRatio; // Assuming 1 USD = 15,800 IDR
+    // Assuming 1 USD = 15,800 IDR
+    // Karena nanti pakai IDRX, harusnya nanti pair nilainya dengan IDRX
+    const requiredCollateralUSD = (amount / 15800) * collateralRatio; 
     const requiredCollateralAmount = collateralType ? requiredCollateralUSD / cryptoPrices[collateralType as keyof typeof cryptoPrices] : 0;
     
     return {
@@ -46,8 +64,13 @@ const ApplyLoan = () => {
     };
   };
 
+  //Memanggil fungsi calculateRequirements() dan menempatkan hasil returnnya ke dalam variabel dengan nama yang sama.
   const { collateralRequiredUSD, collateralRequiredAmount, interestRate, monthlyPayment, collateralRatio } = calculateRequirements();
 
+
+  //Melakukan simulasi saat user menekan tombol submit untuk pengajuan loan
+  //Setelah loading berhasil, fungsi ini akan mengubah state dari applicationSubmited menjadi true
+  // yang secara otomatis akan mengubah tampilan halaman menjadi sukses
   const handleSubmit = () => {
     setLoading(true);
     setTimeout(() => {
@@ -56,6 +79,8 @@ const ApplyLoan = () => {
     }, 2000);
   };
 
+  //Fungsi ini dipanggil ketika pengajuan pinjaman sukses,
+  //Digunakan untuk langsung mengarahkan user ke halaman untuk melakukan deposit kolateral
   const proceedToDeposit = () => {
     // In a real app, you'd pass the loan application data
     navigate('/deposit-collateral', { 
@@ -68,6 +93,7 @@ const ApplyLoan = () => {
     });
   };
 
+  //Merupakan conditional rendering, dimana bagian ini akan ditampilkan jika applicationSubmitted sudah bernilai true
   if (applicationSubmitted) {
     return (
       <div className="min-h-screen bg-background">

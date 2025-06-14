@@ -13,12 +13,19 @@ import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const DepositCollateral = () => {
-  const [loading, setLoading] = useState(false);
+
+  //State management
+  //collateralType, amount, dan depositStatus adalah state yang berhubungan dengan seputar deposit kolateral
+  // Seperti jenis kolateral, jumlahnya berapa, dan status dari deposit tersebut.
+  //loading, akan menampilkan SkeletonLoader saat proses dimulai
   const [collateralType, setCollateralType] = useState("");
   const [amount, setAmount] = useState("");
   const [depositStatus, setDepositStatus] = useState("ready"); // ready, pending, confirmed, completed
-  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();   //digunakan untuk memberikan popup notifikasi pada halaman
 
+  //variabel yang berisi objek nilai dari aset kripto
+  // Nanti akan diganti dengan penggunaan kolateral
   const cryptoRates = {
     bitcoin: 42000,
     ethereum: 2500,
@@ -26,14 +33,17 @@ const DepositCollateral = () => {
     usdc: 1
   };
 
-  const depositAddress = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"; // Example address
+  const depositAddress = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"; // Alamat pengiriman kolateral. Akan disesuaikan dengan produk jadinya nanti
 
+  // Fungsi untuk menghitung perkiraan nilai deposit dalam USD berdasarkan jumlah dan jenis kripto yang dipilih.
   const calculateValue = () => {
-    const amountNum = parseFloat(amount) || 0;
+    const amountNum = parseFloat(amount) || 0;  //mengubah input angka menjadi float
     const rate = cryptoRates[collateralType as keyof typeof cryptoRates] || 0;
     return amountNum * rate;
   };
 
+  //Fungsi yang dijalankan saat tombol "Copy" ditekan. 
+  // Menggunakan API navigator.clipboard untuk menyalin alamat wallet dan kemudian menampilkan notifikasi toast.
   const copyAddress = () => {
     navigator.clipboard.writeText(depositAddress);
     toast({
@@ -42,6 +52,10 @@ const DepositCollateral = () => {
     });
   };
 
+  //Mensimulasikan proses deposit saat tombol "Konfirmasi Deposit" ditekan. 
+  // Fungsi ini menggunakan setTimeout untuk mengubah depositStatus secara bertahap dari pending ke confirmed, lalu completed, 
+  // meniru proses konfirmasi di jaringan blockchain.
+  //Implementasi nanti akan disesuaikan
   const handleDeposit = () => {
     setLoading(true);
     setDepositStatus("pending");
