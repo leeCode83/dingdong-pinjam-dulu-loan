@@ -1,6 +1,6 @@
 // import komponen yang dibutuhkan
-import { Toaster } from "@/components/ui/toaster";      //komponen untuk menampilkan notifikasi pada web                 
-import { Toaster as Sonner } from "@/components/ui/sonner";   
+import { Toaster } from "@/components/ui/toaster"; //komponen untuk menampilkan notifikasi pada web
+import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 // @tanstack/react-query untuk mengambil dan mengolah data dari server.
@@ -26,28 +26,26 @@ import AboutUs from "./pages/AboutUs";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import Whitepaper from "./pages/Whitepaper";
 
 // queryClient digunakan untuk management data, walaupun ini hanya mockup.
-// Variabel ini berfungsi untuk menyimpan cache dari web, 
+// Variabel ini berfungsi untuk menyimpan cache dari web,
 // sehingga pengambilan data yang sama akan lebih cepat.
-// queryClient dibuat di file App.tsx supaya bisa menyimpan cache secara 
+// queryClient dibuat di file App.tsx supaya bisa menyimpan cache secara
 // global (menyimpan seluruh cache dari web)
-const queryClient = new QueryClient();  //inisiasi library
+const queryClient = new QueryClient(); //inisiasi library
 
 const App = () => (
-
-  // QueryClientProvider membungkus semuanya supaya seluruh halaman yang 
+  // QueryClientProvider membungkus semuanya supaya seluruh halaman yang
   // ada di web ini dapat menggunakan management data yang sama. Sehingga mereka
   // bisa menggunakan queryClient yang ada dengan satu kali inisiasi di file ini
   <QueryClientProvider client={queryClient}>
-
     {/* tooltip provider digunakan disini untuk membungkus keseluruhan web
      supaya keseluruhan bagian di web ini dapat menggunakan fungsionalitas 
      dari tootip dengan satu kali inisiasi. tooltip digunakan untuk memberikan 
      informasi jika kita mengarahkan kursor ke ikon atau tombol yang ada 
      di web ini. */}
     <TooltipProvider>
-
       {/* Toaster dan Sonner digunakan disini supaya keseluruhan halaman dari web
       dapat menerima notifikasi yang ada dari web */}
       <Toaster />
@@ -57,7 +55,6 @@ const App = () => (
       ada di web ini. Komponen ini yang menghubungkan web dengan URL di 
       address bar browser. */}
       <BrowserRouter>
-
         {/* kumpulan route yang ada di web ini */}
         <Routes>
           <Route path="/" element={<Homepage />} />
@@ -71,6 +68,7 @@ const App = () => (
           <Route path="/kyc" element={<KYC />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/whitepaper" element={<Whitepaper />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

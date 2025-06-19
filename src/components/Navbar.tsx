@@ -2,7 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Wallet, LogOut } from "lucide-react";
 
 const Navbar = () => {
@@ -17,7 +22,10 @@ const Navbar = () => {
     setIsConnected(true);
     toast({
       title: "Wallet Terhubung",
-      description: `Alamat Anda: ${mockAddress.substring(0, 6)}...${mockAddress.substring(mockAddress.length - 4)}`,
+      description: `Alamat Anda: ${mockAddress.substring(
+        0,
+        6
+      )}...${mockAddress.substring(mockAddress.length - 4)}`,
     });
   };
 
@@ -32,7 +40,9 @@ const Navbar = () => {
 
   const getShortenedAddress = () => {
     if (!walletAddress) return "";
-    return `${walletAddress.substring(0, 6)}...${walletAddress.substring(walletAddress.length - 4)}`;
+    return `${walletAddress.substring(0, 6)}...${walletAddress.substring(
+      walletAddress.length - 4
+    )}`;
   };
 
   return (
@@ -42,21 +52,49 @@ const Navbar = () => {
           <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-sm">DD</span>
           </div>
-          <span className="font-bold text-xl text-foreground">Dingdong Loans</span>
+          <span className="font-bold text-xl text-foreground">
+            Dingdong Loans
+          </span>
         </Link>
-        
+
         <div className="hidden md:flex items-center space-x-6">
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Beranda</Link>
-          <Link to="/dashboard" className="text-muted-foreground hover:text-foreground transition-colors">Dashboard</Link>
-          <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</Link>
-          <Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">Tentang Kami</Link>
+          <Link
+            to="/"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Beranda
+          </Link>
+          <Link
+            to="/dashboard"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/faq"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            FAQ
+          </Link>
+          <Link
+            to="/about"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Tentang Kami
+          </Link>
+          <Link
+            to="/whitepaper"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Whitepaper
+          </Link>
         </div>
 
         <div className="flex items-center space-x-3">
           {!isConnected ? (
-            <Button 
-              className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600" 
-              size="sm" 
+            <Button
+              className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600"
+              size="sm"
               onClick={handleConnectWallet}
             >
               <Wallet className="w-4 h-4 mr-2" />
@@ -70,7 +108,10 @@ const Navbar = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={handleDisconnect} className="text-red-600 cursor-pointer">
+                <DropdownMenuItem
+                  onClick={handleDisconnect}
+                  className="text-red-600 cursor-pointer"
+                >
                   <LogOut className="w-4 h-4 mr-2" />
                   Disconnect
                 </DropdownMenuItem>

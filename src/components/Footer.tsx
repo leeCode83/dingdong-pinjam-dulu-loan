@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -14,34 +13,106 @@ const Footer = () => {
               <span className="font-bold text-lg">Dingdong Loans</span>
             </div>
             <p className="text-muted-foreground text-sm">
-              Platform pinjaman untuk UMKM dengan jaminan crypto yang aman dan terpercaya.
+              Platform pinjaman untuk UMKM dengan jaminan crypto yang aman dan
+              terpercaya.
             </p>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Produk</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="#" className="hover:text-foreground transition-colors">Pinjaman IDRX</Link></li>
-              <li><Link to="#" className="hover:text-foreground transition-colors">Jaminan Crypto</Link></li>
-              <li><Link to="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link></li>
+              <li>
+                <Link
+                  to="#"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Pinjaman IDRX
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Jaminan Crypto
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/dashboard"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Dashboard
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Dukungan</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link></li>
-              <li><Link to="/about" className="hover:text-foreground transition-colors">Tentang Kami</Link></li>
-              <li><Link to="#" className="hover:text-foreground transition-colors">Tutorial</Link></li>
+              <li>
+                <Link
+                  to="/whitepaper"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Whitepaper
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/faq"
+                  className="hover:text-foreground transition-colors"
+                >
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Tentang Kami
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Tutorial
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link to="#" className="hover:text-foreground transition-colors">Syarat & Ketentuan</Link></li>
-              <li><Link to="#" className="hover:text-foreground transition-colors">Kebijakan Privasi</Link></li>
-              <li><Link to="/about" className="hover:text-foreground transition-colors">Tentang Kami</Link></li>
+              <li>
+                <Link
+                  to="#"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Syarat & Ketentuan
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="#"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Kebijakan Privasi
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="hover:text-foreground transition-colors"
+                >
+                  Tentang Kami
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
