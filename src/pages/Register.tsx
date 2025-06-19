@@ -73,9 +73,9 @@ const Register = () => {
       setIsLoading(false);
       setRegistrationSuccess(true);
       
-      // Redirect to KYC after showing success message
+      // Redirect to dashboard after showing success message
       setTimeout(() => {
-        navigate("/kyc");
+        navigate("/dashboard");
       }, 2000);
     }, 1500);
   };
@@ -101,11 +101,10 @@ const Register = () => {
               </div>
               <h2 className="text-2xl font-bold mb-2">Registration Successful!</h2>
               <p className="text-muted-foreground mb-4">
-                Welcome to Dingdong Loans! To activate your account and start borrowing, 
-                please complete your identity verification.
+                Welcome to Dingdong Loans! 
               </p>
               <p className="text-sm text-muted-foreground">
-                Redirecting you to KYC verification...
+                Redirecting you to Dashboard verification...
               </p>
             </CardContent>
           </Card>

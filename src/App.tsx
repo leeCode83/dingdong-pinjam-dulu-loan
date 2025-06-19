@@ -18,7 +18,7 @@ import Homepage from "./pages/Homepage";
 import Dashboard from "./pages/Dashboard";
 import ApplyLoan from "./pages/ApplyLoan";
 import ManageLoans from "./pages/ManageLoans";
-import DepositCollateral from "./pages/DepositCollateral";
+import ManageCollateral from "./pages/ManageCollateral";
 import RepayLoan from "./pages/RepayLoan";
 import KYC from "./pages/KYC";
 import FAQ from "./pages/FAQ";
@@ -66,7 +66,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/apply" element={<ApplyLoan />} />
           <Route path="/loans" element={<ManageLoans />} />
-          <Route path="/deposit-collateral" element={<DepositCollateral />} />
+          <Route path="/manage-collateral" element={<ManageCollateral />} />
           <Route path="/repay-loan" element={<RepayLoan />} />
           <Route path="/kyc" element={<KYC />} />
           <Route path="/faq" element={<FAQ />} />

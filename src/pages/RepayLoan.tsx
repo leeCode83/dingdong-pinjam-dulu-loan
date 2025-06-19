@@ -107,7 +107,7 @@ const RepayLoan = () => {
                     <SelectContent>
                       {loans.map((loan) => (
                         <SelectItem key={loan.id} value={loan.id}>
-                          {loan.id} - Sisa: Rp {loan.outstanding.toLocaleString('id-ID')}
+                          {loan.id} - Sisa: {loan.outstanding.toLocaleString('id-ID')} IDRX
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -120,11 +120,11 @@ const RepayLoan = () => {
                     <div className="space-y-1 text-sm">
                       <div className="flex justify-between">
                         <span>Sisa Hutang:</span>
-                        <span className="font-medium">Rp {selectedLoanData.outstanding.toLocaleString('id-ID')}</span>
+                        <span className="font-medium">{selectedLoanData.outstanding.toLocaleString('id-ID')} IDRX</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Cicilan Bulanan:</span>
-                        <span className="font-medium">Rp {selectedLoanData.monthlyPayment.toLocaleString('id-ID')}</span>
+                        <span className="font-medium">{selectedLoanData.monthlyPayment.toLocaleString('id-ID')} IDRX</span>
                       </div>
                     </div>
                   </div>
@@ -137,13 +137,13 @@ const RepayLoan = () => {
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="full" id="full" />
                         <Label htmlFor="full" className="cursor-pointer">
-                          Pelunasan (Rp {selectedLoanData?.outstanding.toLocaleString('id-ID')})
+                          Pelunasan ({selectedLoanData?.outstanding.toLocaleString('id-ID')} IDRX)
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem value="monthly" id="monthly" />
                         <Label htmlFor="monthly" className="cursor-pointer">
-                          Cicilan Bulanan (Rp {selectedLoanData?.monthlyPayment.toLocaleString('id-ID')})
+                          Cicilan Bulanan ({selectedLoanData?.monthlyPayment.toLocaleString('id-ID')} IDRX)
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
@@ -165,7 +165,7 @@ const RepayLoan = () => {
                           onChange={(e) => setCustomAmount(e.target.value)}
                         />
                         <p className="text-sm text-muted-foreground">
-                          Minimum: Rp 500,000
+                          Minimum: 500,000 IDRX
                         </p>
                       </div>
                     )}
@@ -222,7 +222,7 @@ const RepayLoan = () => {
                       <div className="space-y-2">
                         <div className="flex justify-between">
                           <span className="text-sm text-muted-foreground">Jumlah Pembayaran:</span>
-                          <span className="font-medium">Rp {getRepaymentAmount().toLocaleString('id-ID')}</span>
+                          <span className="font-medium">{getRepaymentAmount().toLocaleString('id-ID')}</span>
                         </div>
                         <div className="flex justify-between">
                           <span className="text-sm text-muted-foreground">Dalam IDRX:</span>
@@ -285,7 +285,7 @@ const RepayLoan = () => {
 
                     <div className="flex items-center justify-between">
                       <span>Jumlah Dibayar</span>
-                      <span className="font-medium">Rp {getRepaymentAmount().toLocaleString('id-ID')}</span>
+                      <span className="font-medium">{getRepaymentAmount().toLocaleString('id-ID')} IDRX</span>
                     </div>
 
                     {repaymentStatus === "completed" && (
