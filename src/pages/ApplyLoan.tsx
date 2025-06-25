@@ -1,3 +1,4 @@
+// Path: src/pages/ApplyLoan.tsx
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,7 +9,13 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import {
+  Carousel, // Keep for potential future use or if styling is easier for single item
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"; //
 import { Calculator, AlertCircle, CheckCircle, ArrowRight, Wallet, TrendingUp, HelpCircle } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +27,12 @@ const ApplyLoan = () => {
   const [applicationSubmitted, setApplicationSubmitted] = useState(false);
   const navigate = useNavigate();
 
+  // State untuk mengelola tampilan langkah tutorial
+  const [currentTutorialStepIndex, setCurrentTutorialStepIndex] = useState(0); //
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false); //
+
   const totalCollateralValueUSD = 12500;
-  const maxLTV = 2/3;
+  const maxLTV = 2/3;   //perbadingan jumlah pinjaman yang dimiliki dengan jaminan yang dimiliki
   const usdToIdrRate = 15800;
   const maxLoanableUSD = totalCollateralValueUSD * maxLTV;
   const maxLoanableIDRX = maxLoanableUSD * usdToIdrRate;
@@ -36,28 +47,46 @@ const ApplyLoan = () => {
   
   const { monthlyPayment } = calculateRepayments();
 
+  // Definisi langkah-langkah tutorial dengan fokus pada highlight deskriptif
   const tutorialSteps = [
     {
-      title: "Langkah 1: Periksa Jaminan & Limit",
-      description: "Lihat total jaminan yang Anda miliki dan batas maksimal pinjaman yang bisa diajukan. Semua dihitung otomatis untuk Anda di bagian atas formulir.",
-      image: "https://placehold.co/600x400/e2e8f0/64748b?text=Langkah+1"
+      key: 'step1-collateral-summary',
+      title: "Langkah 1: Periksa Ringkasan Limit",
+      description: "Pertama, perhatikan bagian kartu di atas formulir. Di sini Anda akan melihat 'Total Jaminan Anda' dan 'Maksimal Pinjaman' yang bisa Anda ajukan dalam IDRX. Nilai ini dihitung otomatis berdasarkan aset kripto yang Anda miliki.",
     },
     {
-      title: "Langkah 2: Isi Detail Pinjaman",
-      description: "Masukkan jumlah pinjaman yang Anda inginkan (tidak melebihi batas maksimal) dan pilih jangka waktu pembayaran yang sesuai.",
-      image: "https://placehold.co/600x400/e2e8f0/64748b?text=Langkah+2"
+      key: 'step2-loan-amount',
+      title: "Langkah 2: Isi Jumlah Pinjaman",
+      description: "Fokus pada kolom input 'Jumlah Pinjaman (IDRX)'. Masukkan jumlah IDRX yang ingin Anda pinjam. Pastikan angka yang Anda masukkan tidak melebihi 'Maksimal Pinjaman' yang tertera di ringkasan limit Anda.",
     },
     {
-      title: "Langkah 3: Tinjau Ringkasan",
-      description: "Periksa kembali ringkasan pinjaman di sebelah kanan, termasuk estimasi cicilan bulanan Anda. Pastikan semuanya sudah benar.",
-      image: "https://placehold.co/600x400/e2e8f0/64748b?text=Langkah+3"
+      key: 'step3-duration',
+      title: "Langkah 3: Pilih Jangka Waktu",
+      description: "Selanjutnya, gunakan dropdown 'Jangka Waktu (Bulan)' untuk memilih durasi pinjaman Anda. Pilihan ini akan mempengaruhi perhitungan cicilan bulanan Anda.",
     },
     {
-      title: "Langkah 4: Ajukan & Selesai!",
-      description: "Klik tombol 'Ajukan Pinjaman'. Jika disetujui, dana akan langsung cair ke wallet Anda dalam beberapa menit. Mudah, kan?",
-      image: "https://placehold.co/600x400/e2e8f0/64748b?text=Langkah+4"
-    }
-  ];
+      key: 'step4-loan-summary',
+      title: "Langkah 4: Tinjau Ringkasan Pinjaman",
+      description: "Lihatlah kartu 'Ringkasan Pinjaman' di sisi kanan. Ini adalah tempat di mana Anda dapat melihat detail pinjaman yang telah Anda masukkan, termasuk estimasi 'Pembayaran Bulanan' dan 'Suku Bunga'. Pastikan semua sudah sesuai.",
+    },
+    {
+      key: 'step5-submit-button',
+      title: "Langkah 5: Ajukan Pinjaman",
+      description: "Setelah meninjau semua detail dan memastikan semuanya benar, klik tombol 'Ajukan Pinjaman'. Jika aplikasi Anda memenuhi syarat, dana akan langsung cair ke wallet Anda dalam beberapa menit.",
+    },
+  ]; //
+
+  const currentTutorialStep = tutorialSteps[currentTutorialStepIndex]; 
+
+  const handleNextTutorialStep = () => {
+    setCurrentTutorialStepIndex((prevIndex) =>
+      Math.min(prevIndex + 1, tutorialSteps.length - 1)
+    );
+  }; //
+
+  const handlePreviousTutorialStep = () => {
+    setCurrentTutorialStepIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  }; //
 
   const handleSubmit = () => {
     if (isLoanAmountExceeded) return;
@@ -97,7 +126,7 @@ const ApplyLoan = () => {
   }
 
   return (
-    <Dialog>
+    <Dialog open={isTutorialOpen} onOpenChange={setIsTutorialOpen}> {/* */}
       <div className="min-h-screen bg-background"><Navbar />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
@@ -112,7 +141,7 @@ const ApplyLoan = () => {
                       <CardDescription>Isi form berikut untuk mengajukan pinjaman.</CardDescription>
                     </div>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="icon" className="flex-shrink-0">
+                      <Button variant="outline" size="icon" className="flex-shrink-0" onClick={() => setCurrentTutorialStepIndex(0)}> {/* */}
                         <HelpCircle className="h-4 w-4" />
                       </Button>
                     </DialogTrigger>
@@ -163,25 +192,26 @@ const ApplyLoan = () => {
         <DialogHeader>
           <DialogTitle>Cara Mengajukan Pinjaman</DialogTitle>
         </DialogHeader>
-        <Carousel className="w-full max-w-xs mx-auto">
-          <CarouselContent>
-            {tutorialSteps.map((step, index) => (
-              <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex aspect-square items-center justify-center p-6 flex-col space-y-4">
-                      <img src={step.image} alt={step.title} className="rounded-lg mb-4 w-full" />
-                      <h3 className="text-lg font-semibold text-center">{step.title}</h3>
-                      <p className="text-sm text-muted-foreground text-center">{step.description}</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+        <Card>
+            <CardContent className="flex flex-col items-center justify-center p-6 space-y-4">
+              <h3 className="text-lg font-semibold text-center">{currentTutorialStep.title}</h3> {/* */}
+              <p className="text-sm text-muted-foreground text-center">{currentTutorialStep.description}</p> {/* */}
+              <div className="flex justify-between w-full mt-4">
+                <Button
+                  variant="outline"
+                  onClick={handlePreviousTutorialStep}
+                  disabled={currentTutorialStepIndex === 0}
+                >
+                  Kembali
+                </Button>
+                {currentTutorialStepIndex < tutorialSteps.length - 1 ? (
+                  <Button onClick={handleNextTutorialStep}>Lanjut</Button>
+                ) : (
+                  <Button onClick={() => setIsTutorialOpen(false)}>Selesai</Button> 
+                )}
+              </div>
+            </CardContent>
+        </Card>
       </DialogContent>
     </Dialog>
   );
