@@ -65,21 +65,7 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// Additional green palette colors for more variety
-				'green-50': '#f0fdf4',
-				'green-100': '#dcfce7',
-				'green-200': '#bbf7d0',
-				'green-300': '#86efac',
-				'green-400': '#4ade80',
-				'green-500': '#22c55e',
-				'green-600': '#16a34a',
-				'green-700': '#15803d',
-				'green-800': '#166534',
-				'green-900': '#14532d',
-				'lime-400': '#85cc17',
-				'lime-500': '#84cc16',
-				'lime-600': '#65a30d',
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

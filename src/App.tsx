@@ -1,4 +1,3 @@
-
 // import komponen yang dibutuhkan
 import { Toaster } from "@/components/ui/toaster"; //komponen untuk menampilkan notifikasi pada web
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -21,14 +20,13 @@ import ApplyLoan from "./pages/ApplyLoan";
 import ManageLoans from "./pages/ManageLoans";
 import ManageCollateral from "./pages/ManageCollateral";
 import RepayLoan from "./pages/RepayLoan";
-import DepositCollateral from "./pages/DepositCollateral";
 import KYC from "./pages/KYC";
 import FAQ from "./pages/FAQ";
 import AboutUs from "./pages/AboutUs";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
-import Whitepaper from "./pages/whitepaper";
+import Whitepaper from "./pages/Whitepaper";
 
 // queryClient digunakan untuk management data, walaupun ini hanya mockup.
 // Variabel ini berfungsi untuk menyimpan cache dari web,
@@ -67,7 +65,6 @@ const App = () => (
           <Route path="/loans" element={<ManageLoans />} />
           <Route path="/manage-collateral" element={<ManageCollateral />} />
           <Route path="/repay-loan" element={<RepayLoan />} />
-          <Route path="/deposit-collateral" element={<DepositCollateral />} />
           <Route path="/kyc" element={<KYC />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about" element={<AboutUs />} />

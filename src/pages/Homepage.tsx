@@ -1,4 +1,3 @@
-
 // import komponen shadcn yang dibutuhkan (button, card, dll)
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,12 +21,12 @@ const Homepage = () => {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-lime-50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-green-50" />
         <div className="relative container mx-auto px-4 py-20">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground">
               Pinjaman Mudah untuk{" "}
-              <span className="bg-gradient-to-r from-green-600 to-lime-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-500 to-green-500 bg-clip-text text-transparent">
                 UMKM Indonesia
               </span>
             </h1>
@@ -37,12 +36,12 @@ const Homepage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/apply">
-                <Button size="lg" className="bg-gradient-to-r from-green-600 to-lime-500 hover:from-green-700 hover:to-lime-600 text-white px-8 py-6 text-lg">
+                <Button size="lg" className="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white px-8 py-6 text-lg">
                   Ajukan Pinjaman Sekarang
                 </Button>
               </Link>
               <Link to="/dashboard">
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg border-green-600 text-green-700 hover:bg-green-50">
+                <Button variant="outline" size="lg" className="px-8 py-6 text-lg">
                   Lihat Dashboard
                 </Button>
               </Link>
@@ -63,7 +62,7 @@ const Homepage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="text-center border-0 shadow-lg">
             <CardHeader>
-              <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-lime-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white font-bold text-xl">1</span>
               </div>
               <CardTitle>Deposit Crypto</CardTitle>
@@ -75,7 +74,7 @@ const Homepage = () => {
 
           <Card className="text-center border-0 shadow-lg">
             <CardHeader>
-              <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-lime-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white font-bold text-xl">2</span>
               </div>
               <CardTitle>Tentukan Jumlah</CardTitle>
@@ -87,7 +86,7 @@ const Homepage = () => {
 
           <Card className="text-center border-0 shadow-lg">
             <CardHeader>
-              <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-lime-500 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-white font-bold text-xl">3</span>
               </div>
               <CardTitle>Terima Pinjaman</CardTitle>
@@ -112,7 +111,7 @@ const Homepage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="border-0 shadow-lg">
               <CardHeader className="text-center">
-                <Clock className="w-12 h-12 text-green-600 mx-auto mb-4" />
+                <Clock className="w-12 h-12 text-blue-500 mx-auto mb-4" />
                 <CardTitle className="text-lg">Proses Cepat</CardTitle>
                 <CardDescription>
                   Persetujuan dalam hitungan menit, bukan hari
@@ -122,7 +121,7 @@ const Homepage = () => {
 
             <Card className="border-0 shadow-lg">
               <CardHeader className="text-center">
-                <Shield className="w-12 h-12 text-lime-600 mx-auto mb-4" />
+                <Shield className="w-12 h-12 text-green-500 mx-auto mb-4" />
                 <CardTitle className="text-lg">100% Aman</CardTitle>
                 <CardDescription>
                   Teknologi blockchain untuk keamanan maksimal
@@ -132,7 +131,7 @@ const Homepage = () => {
 
             <Card className="border-0 shadow-lg">
               <CardHeader className="text-center">
-                <TrendingUp className="w-12 h-12 text-green-600 mx-auto mb-4" />
+                <TrendingUp className="w-12 h-12 text-blue-500 mx-auto mb-4" />
                 <CardTitle className="text-lg">Bunga Kompetitif</CardTitle>
                 <CardDescription>
                   Suku bunga rendah dan transparan
@@ -142,7 +141,7 @@ const Homepage = () => {
 
             <Card className="border-0 shadow-lg">
               <CardHeader className="text-center">
-                <CheckCircle className="w-12 h-12 text-lime-600 mx-auto mb-4" />
+                <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
                 <CardTitle className="text-lg">Tanpa Ribet</CardTitle>
                 <CardDescription>
                   Tidak perlu cek skor kredit tradisional
@@ -155,7 +154,7 @@ const Homepage = () => {
 
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-20">
-        <div className="bg-gradient-to-r from-green-600 to-lime-500 rounded-2xl p-12 text-center text-white">
+        <div className="bg-gradient-to-r from-blue-500 to-green-500 rounded-2xl p-12 text-center text-white">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Siap Mengembangkan Bisnis Anda?
           </h2>
@@ -163,7 +162,7 @@ const Homepage = () => {
             Bergabung dengan ribuan UMKM yang sudah merasakan kemudahan Dingdong Loans
           </p>
           <Link to="/apply">
-            <Button size="lg" variant="secondary" className="px-8 py-6 text-lg bg-white text-green-700 hover:bg-green-50">
+            <Button size="lg" variant="secondary" className="px-8 py-6 text-lg">
               Mulai Sekarang
             </Button>
           </Link>
